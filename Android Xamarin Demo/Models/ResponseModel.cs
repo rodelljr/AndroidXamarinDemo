@@ -10,6 +10,7 @@ using Android.Runtime;
 using Android.Views;
 using Android.Widget;
 using Java.Interop;
+using Newtonsoft.Json;
 
 namespace XamarinDemo.Models
 {
@@ -17,9 +18,9 @@ namespace XamarinDemo.Models
     {
         private static readonly GenericParcelableCreator<ResponseModel> creator
             = new GenericParcelableCreator<ResponseModel>((parcel) => new ResponseModel(parcel));
-
-        public string Message { get; set; }
+        [JsonProperty("duration")]
         public long Duration { get; set; }
+        [JsonProperty("risetime")]
         public long Risetime { get; set; }
 
         public ResponseModel() { }
@@ -28,7 +29,6 @@ namespace XamarinDemo.Models
         {
             Duration = parcel.ReadLong();
             Risetime = parcel.ReadLong();
-            Message = parcel.ReadString();
         }
 
         public int DescribeContents()
@@ -40,7 +40,6 @@ namespace XamarinDemo.Models
         {
             dest.WriteLong(Duration);
             dest.WriteLong(Risetime);
-            dest.WriteString(Message);
         }
 
         [ExportField("CREATOR")]

@@ -14,9 +14,16 @@ namespace XamarinDemo.Models
 {
     public class LocationModel
     {
-        public string Location { get; set; }
-        public double Latitude { get; set; }
-        public double Longitude { get; set; }
+        public string Location { get; private set; }
+        public double Latitude { get; private set; }
+        public double Longitude { get; private set; }
+
+        public LocationModel(string location, double lat, double lon)
+        {
+            Location = location;
+            Latitude = lat;
+            Longitude = lon;
+        }
 
         public override string ToString()
         {
