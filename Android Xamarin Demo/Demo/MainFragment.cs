@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Globalization;
 using System.Linq;
 using System.Text;
 
@@ -71,8 +72,8 @@ namespace XamarinDemo.Demo
         public override void OnBindViewHolder(RecyclerView.ViewHolder holder, int position)
         {
             DemoViewHolder vh = holder as DemoViewHolder;
-            vh.mDuration.Text = mValues[position].Duration.ToString();
-            vh.mTime.Text = mValues[position].Risetime.ToString();
+            vh.mDuration.Text = mValues[position].Duration.ToString();            
+            vh.mTime.Text = GetDateTime(mValues[position].Risetime);
         }
 
         public override RecyclerView.ViewHolder OnCreateViewHolder(ViewGroup parent, int viewType)
@@ -80,6 +81,13 @@ namespace XamarinDemo.Demo
             View view = LayoutInflater.From(parent.Context).Inflate(Resource.Layout.main_frag_item, parent, false);
             return new DemoViewHolder(view);
         }
+
+        private string GetDateTime(long value)
+        {
+            var theDate = new DateTime(1970, 1, 1, 0, 0, 0, DateTimeKind.Utc).AddSeconds(value);
+            return theDate.ToString();
+        }
+
 
         public class DemoViewHolder : RecyclerView.ViewHolder
         {
